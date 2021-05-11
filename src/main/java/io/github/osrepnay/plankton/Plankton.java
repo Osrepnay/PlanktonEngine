@@ -23,6 +23,9 @@ public class Plankton {
             }
             int piece = game.pieceOfSquare(square);
             for(PieceMove move : game.pieceMovesFromSquare(square)) {
+                if(!validMove(game, move, color, piece)) {
+                    continue;
+                }
                 moves.add(move);
             }
         }
@@ -30,7 +33,6 @@ public class Plankton {
         Map<Integer, List<Integer>> sectionedMoves = IntStream.rangeClosed(0, moves.size() - 1)
                 .boxed()
                 .collect(Collectors.groupingBy(x -> x % numCores));
-        ExecutorService executorService = Executors.newFixedThreadPool(numCores);
         List<FindScore> threads = new ArrayList<>();
         for(List<Integer> moveGroupIdxs : sectionedMoves.values()) {
             List<PieceMove> moveGroup = moveGroupIdxs.stream()
@@ -84,9 +86,6 @@ public class Plankton {
                 if(!keepSearching) {
                     result = new double[] {-1, -1, 0, -1};
                     break;
-                }
-                if(!validMove(game, move, color, piece)) {
-                    continue;
                 }
                 PrevMoveGameState prevMoveState = game.makeMove(move, color, piece);
                 double moveScore = color == 0
