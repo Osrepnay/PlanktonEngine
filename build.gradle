@@ -1,0 +1,18 @@
+plugins {
+    id 'java-library'
+    id "me.champeau.jmh" version "0.6.4"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'io.github.osrepnay.plankton.UCIInterface'
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
