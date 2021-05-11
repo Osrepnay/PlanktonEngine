@@ -19,3 +19,5 @@ with `java -jar build/libs/Plankton.jar`.
 
 - Better eval
 - Magic Bitboards
+
+Archived because I've mostly lost motivation for developing it after accidentally clearing the commit history and Java being an annoyance a lot of the time. All development is going to be on [Osrepnay/plankton-rs](https://github.com/Osrepnay/plankton-rs) now.
